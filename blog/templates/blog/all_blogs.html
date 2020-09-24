@@ -1,0 +1,31 @@
+{% extends 'personal_portfolio/base.html' %}
+
+{% block content %}   
+<div class="container"> 
+    <h3 class="text-dark text-center" style="font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-size: 2.25rem; margin-top:15px;">
+        Blogs
+    </h3>
+            
+   <!-- <h3>Himanshi has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h3>-->
+    {% for blog in blogs %}
+        <a href= "{% url 'blog:detail' blog.id %}" class="blog-post-title"><h2>{{ blog.title }}</h2></a>
+        <p>{{ blog.desc|striptags|truncatechars:100 }}</p>
+        <p>{{ blog.date|date:'M d Y' }} by <a href="{% url 'home' %}"><i>Himanshi</i></a></p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<!--
+    blog{{ blogs.count|pluralize }}
+    //if count if 1 it says blog o/w blogs django has this inbuilt feature
+    {{ blog.date|date:'M d Y'|upper}}
+    // format the date like Jan 24 2020 or JAN 24 2020
+    F jS Y 
+    // F - full month, j - date, S - th,nd..
+    blog.desc| truncatechars:100
+    // to limit the no. of chars
+    {{ blog.desc|safe }}
+    // allows htmltags to be shown like bold or italic....
+    {{ blog.desc|striptags }}
+    // to not include any html effect but also no tags visible    
+-->
